@@ -34,6 +34,7 @@
 using namespace std;
 
 void ndkGenerateRole(string id, string executablePath);
+void qmlGenerateRole(string id);
 // deprecated
 void __attribute__((deprecated)) pdkGenerateRole(string id, string executablePath);
 void roleGenerate(string templatePath, string destinationPath, string id, string executablePath);

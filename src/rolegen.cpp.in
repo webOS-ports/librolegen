@@ -28,6 +28,8 @@
 #define NDK_TEMPLATE_PATH	"@WEBOS_INSTALL_DATADIR@/rolegen/templates/NDK"
 #define TRITON_TEMPLATE_PATH 	"@WEBOS_INSTALL_DATADIR@/rolegen/templates/Triton"
 #define TRITON_EXE_PATH		"js"
+#define QML_TEMPLATE_PATH	"@WEBOS_INSTALL_DATADIR@/rolegen/templates/QML"
+#define QML_EXE_PATH		"js"
 
 using namespace std;
 
@@ -120,6 +122,26 @@ void ndkGenerateRole(string id, string executablePath)
 	destinationPath += "/" + id + ".json";
 	
 	roleGenerate(templatePath+".prv", destinationPath, id, executablePath);
+}
+
+void qmlGenerateRole(string id)
+{
+	checkDirStructure();
+
+	string templatePath;
+	string destinationPath;
+
+	templatePath = QML_TEMPLATE_PATH;
+	destinationPath = DYN_PUBROLES_PATH;
+	destinationPath += "/" + id + ".json";
+
+	roleGenerate(templatePath+".pub", destinationPath, id, QML_EXE_PATH);
+
+	templatePath = QML_TEMPLATE_PATH;
+	destinationPath = DYN_PRVROLES_PATH;
+	destinationPath += "/" + id + ".json";
+
+	roleGenerate(templatePath+".prv", destinationPath, id, QML_EXE_PATH);
 }
 
 // deprecated
