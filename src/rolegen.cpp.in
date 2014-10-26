@@ -33,7 +33,6 @@
 
 using namespace std;
 
-#if 0
 /* isPrivilegedAppId() used by tritonGenerateRole().
  * Re-enable if temporary fix resolved.
  */
@@ -43,12 +42,11 @@ static bool isPrivilegedAppId(const char *appId)
 		return false;
 
 	// hard code known exceptions here
-	if (strncmp(appId, "com.palm.", 9) == 0)
+	if (strncmp(appId, "org.webosports.", 15) == 0)
 		return true;
 
 	return false;
 }
-#endif
 
 static bool fexists(string filename)
 {
@@ -137,11 +135,13 @@ void qmlGenerateRole(string id)
 
 	roleGenerate(templatePath+".pub", destinationPath, id, QML_EXE_PATH);
 
-	templatePath = QML_TEMPLATE_PATH;
-	destinationPath = DYN_PRVROLES_PATH;
-	destinationPath += "/" + id + ".json";
+	if (isPrivilegedAppId(id.c_str())) {
+		templatePath = QML_TEMPLATE_PATH;
+		destinationPath = DYN_PRVROLES_PATH;
+		destinationPath += "/" + id + ".json";
 
-	roleGenerate(templatePath+".prv", destinationPath, id, QML_EXE_PATH);
+		roleGenerate(templatePath+".prv", destinationPath, id, QML_EXE_PATH);
+	}
 }
 
 // deprecated
