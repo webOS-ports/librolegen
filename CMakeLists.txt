@@ -22,14 +22,6 @@ include(webOS/webOS)
 webos_modules_init(1 0 0 QUALIFIER RC4)
 webos_component(2 1 0)
 
-include(FindPkgConfig)
-
-pkg_check_modules(GLIB2 REQUIRED glib-2.0)
-include_directories(${GLIB2_INCLUDE_DIRS})
-webos_add_compiler_flags(ALL ${GLIB2_CFLAGS_OTHER})
-
-webos_build_pkgconfig()
-
 include_directories(include/public)
 webos_add_compiler_flags(ALL -Wall)
 webos_add_linker_options(ALL --no-undefined)
